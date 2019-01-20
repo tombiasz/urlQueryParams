@@ -1,8 +1,9 @@
 import Filter from '../filter';
+import Operator from '../operator';
 
 describe('Filter', () => {
   const attribute = 'fizz';
-  const operator = 'is';
+  const operator = Operator.Equal;
   const value = 'buzz';
   let filter: Filter;
 

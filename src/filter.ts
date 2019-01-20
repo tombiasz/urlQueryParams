@@ -1,10 +1,12 @@
+import Operator from './operator';
+
 export default class Filter {
   groupName: string = 'filter';
   attribute: string;
   operator: string;
   value: string;
 
-  constructor(attribute: string, operator: string, value: string) {
+  constructor(attribute: string, operator: Operator, value: string) {
     this.attribute = attribute;
     this.operator = operator;
     this.value = value;
