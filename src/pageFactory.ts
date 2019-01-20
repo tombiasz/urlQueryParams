@@ -1,6 +1,6 @@
 import Page from './page';
 
-export class PageFactory {
+export default class PageFactory {
   // eslint-disable-next-line class-methods-use-this
   limit(value: number = 10) : Page {
     return new Page('limit', String(value));

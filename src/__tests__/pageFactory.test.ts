@@ -1,5 +1,5 @@
 import Page from '../page';
-import { PageFactory } from '../pageFactory';
+import PageFactory from '../pageFactory';
 
 jest.mock('../page', () => jest.fn().mockImplementation(() => ({})));
 
