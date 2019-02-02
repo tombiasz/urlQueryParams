@@ -4,20 +4,24 @@ import FilterFactory from './filterFactory';
 import PageFactory from './pageFactory';
 import SortFactory from './sortFactory';
 
-export default class queryParamsBuilder {
-  params : Array<QueryParam>;
+export default class QueryParamsBuilder {
+  private _params : Array<QueryParam>;
 
   constructor() {
-    this.params = [];
+    this._params = [];
+  }
+
+  get params() {
+    return this._params;
   }
 
   add(...params: Array<QueryParam>) : this {
-    this.params.push(...params);
+    this._params.push(...params);
     return this;
   }
 
   buildString() : string {
-    const arr = this.params.map(param => param.toString());
+    const arr = this._params.map(param => param.toString());
     return `?${arr.join('&')}`;
   }
 
