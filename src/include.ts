@@ -1,4 +1,6 @@
-export default class Include {
+import QueryParam from './queryParam';
+
+export default class Include implements QueryParam {
   groupName: string = 'include';
   attribute: string;
 

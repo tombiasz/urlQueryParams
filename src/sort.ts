@@ -1,4 +1,6 @@
-export default class Sort {
+import QueryParam from './queryParam';
+
+export default class Sort implements QueryParam {
   groupName: string = 'sort';
   attribute: string;
   direction: string;

@@ -1,4 +1,6 @@
-export default class Page {
+import QueryParam from './queryParam';
+
+export default class Page implements QueryParam {
   groupName: string = 'page';
   attribute: string;
   value: string;

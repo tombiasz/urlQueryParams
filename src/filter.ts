@@ -1,6 +1,7 @@
+import QueryParam from './queryParam';
 import Operator from './operator';
 
-export default class Filter {
+export default class Filter implements QueryParam {
   groupName: string = 'filter';
   attribute: string;
   operator: string;
