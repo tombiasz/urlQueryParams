@@ -1,10 +1,11 @@
-import QueryParam from './queryParam';
+import AbstractQueryParam from './abstractQueryParam';
 
-export default class Include implements QueryParam {
+export default class Include extends AbstractQueryParam {
   private groupName: string = 'include';
   private attributes: Array<string>;
 
   constructor(...attributes: Array<string>) {
+    super();
     this.attributes = attributes;
   }
 
@@ -14,10 +15,5 @@ export default class Include implements QueryParam {
 
   get value() : string {
     return this.attributes.join(',');
-  }
-
-  toString() : string {
-    const { field, value } = this;
-    return `${field}=${value}`;
   }
 }

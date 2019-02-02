@@ -1,11 +1,12 @@
-import QueryParam from './queryParam';
+import AbstractQueryParam from './abstractQueryParam';
 
-export default class Sort implements QueryParam {
+export default class Sort extends AbstractQueryParam {
   private groupName: string = 'sort';
   private attribute: string;
   private direction: string;
 
   constructor(attribute: string, direction: string) {
+    super();
     this.attribute = attribute;
     this.direction = direction;
   }
@@ -17,10 +18,5 @@ export default class Sort implements QueryParam {
   get value() : string {
     const { attribute, direction } = this;
     return `${direction}${attribute}`;
-  }
-
-  toString() : string {
-    const { field, value } = this;
-    return `${field}=${value}`;
   }
 }

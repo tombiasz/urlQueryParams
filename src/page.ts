@@ -1,11 +1,12 @@
-import QueryParam from './queryParam';
+import AbstractQueryParam from './abstractQueryParam';
 
-export default class Page implements QueryParam {
+export default class Page extends AbstractQueryParam {
   private groupName: string = 'page';
   private attribute: string;
   readonly value: string;
 
   constructor(attribute: string, value: string) {
+    super();
     this.attribute = attribute;
     this.value = value;
   }
@@ -13,10 +14,5 @@ export default class Page implements QueryParam {
   get field() {
     const { groupName, attribute } = this;
     return `${groupName}[${attribute}]`;
-  }
-
-  toString() : string {
-    const { field, value } = this;
-    return `${field}=${value}`;
   }
 }
