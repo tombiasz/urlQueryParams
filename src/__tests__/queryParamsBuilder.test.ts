@@ -53,5 +53,18 @@ describe('QueryParamsBuilder', () => {
         expect(q.buildString()).toBe('?foo=bar&fizz=buzz');
       });
     });
+
+    describe('buildJson()', () => {
+      test('should build proper query params for one Param', () => {
+        q.add(new SampleParam('foo', 'bar'));
+        expect(q.buildJson()).toEqual({ foo: 'bar' });
+      });
+
+      test('should build proper query params for many Param', () => {
+        q.add(new SampleParam('foo', 'bar'));
+        q.add(new SampleParam('fizz', 'buzz'));
+        expect(q.buildJson()).toEqual({ foo: 'bar', fizz: 'buzz' });
+      });
+    });
   });
 });

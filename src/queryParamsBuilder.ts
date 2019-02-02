@@ -25,6 +25,10 @@ export default class QueryParamsBuilder {
     return `?${arr.join('&')}`;
   }
 
+  buildJson() : object {
+    return this._params.reduce((prev, { field, value }) => ({ ...prev, [field]: value}), {});
+  }
+
   static page() : PageFactory {
     return new PageFactory();
   }
