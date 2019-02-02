@@ -16,13 +16,15 @@ describe('Sort', () => {
     });
   });
 
-  describe('toJson()', () => {
-    test('should build proper json', () => {
-      const expected = {
-        field: 'sort',
-        value: `${direction}${attribute}`,
-      };
-      expect(sort.toJson()).toEqual(expected);
+  describe('field', () => {
+    test('should properly set field attribute', () => {
+      expect(sort.field).toBe(`sort`);
+    });
+  });
+
+  describe('value', () => {
+    test('should properly set value attribute', () => {
+      expect(sort.value).toBe(`${direction}${attribute}`);
     });
   });
 });

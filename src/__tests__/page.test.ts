@@ -16,13 +16,15 @@ describe('Page', () => {
     });
   });
 
-  describe('toJson()', () => {
-    test('should build proper json', () => {
-      const expected = {
-        field: `page[${attribute}]`,
-        value,
-      };
-      expect(page.toJson()).toEqual(expected);
+  describe('field', () => {
+    test('should properly set field attribute', () => {
+      expect(page.field).toBe(`page[${attribute}]`);
+    });
+  });
+
+  describe('value', () => {
+    test('should properly set value attribute', () => {
+      expect(page.value).toBe(value);
     });
   });
 });

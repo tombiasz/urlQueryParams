@@ -2,21 +2,17 @@ import QueryParam from '../queryParam';
 import QueryParamsBuilder from '../queryParamsBuilder';
 
 class SampleParam implements QueryParam {
-  attr : string;
+  readonly field : string;
+  readonly value : string;
 
-  constructor(attr : string) {
-    this.attr = attr;
+  constructor(field : string, value : string) {
+    this.field = field;
+    this.value = value;
   }
 
   toString() {
-    return this.attr;
-  }
-
-  toJson() {
-    return {
-      field: '',
-      value: '',
-    };
+    const { field, value } = this;
+    return `${field}=${value}`;
   }
 }
 
@@ -32,14 +28,14 @@ describe('QueryParamsBuilder', () => {
 
     describe('add()', () => {
       test('should add param to list of params', () => {
-        const param = new SampleParam('foo');
+        const param = new SampleParam('foo', 'bar');
         q.add(param);
         expect(q.params).toEqual([param]);
       });
 
       test('should add many params to list of params', () => {
-        const param1 = new SampleParam('foo');
-        const param2 = new SampleParam('bar');
+        const param1 = new SampleParam('foo', 'bar');
+        const param2 = new SampleParam('fizz', 'buzz');
         q.add(param1, param2);
         expect(q.params).toEqual([param1, param2]);
       });
@@ -47,14 +43,14 @@ describe('QueryParamsBuilder', () => {
 
     describe('buildString()', () => {
       test('should build proper query params for one Param', () => {
-        q.add(new SampleParam('foo'));
-        expect(q.buildString()).toBe('?foo');
+        q.add(new SampleParam('foo', 'bar'));
+        expect(q.buildString()).toBe('?foo=bar');
       });
 
       test('should build proper query params for many Param', () => {
-        q.add(new SampleParam('foo'));
-        q.add(new SampleParam('bar'));
-        expect(q.buildString()).toBe('?foo&bar');
+        q.add(new SampleParam('foo', 'bar'));
+        q.add(new SampleParam('fizz', 'buzz'));
+        expect(q.buildString()).toBe('?foo=bar&fizz=buzz');
       });
     });
   });

@@ -18,13 +18,15 @@ describe('Filter', () => {
     });
   });
 
-  describe('toJson()', () => {
-    test('should build proper json', () => {
-      const expected = {
-        field: `filter[${attribute}][${operator}]`,
-        value,
-      };
-      expect(filter.toJson()).toEqual(expected);
+  describe('field', () => {
+    test('should properly set field attribute', () => {
+      expect(filter.field).toBe(`filter[${attribute}][${operator}]`);
+    });
+  });
+
+  describe('value', () => {
+    test('should properly set value attribute', () => {
+      expect(filter.value).toBe(value);
     });
   });
 });

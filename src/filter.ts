@@ -2,10 +2,10 @@ import QueryParam from './queryParam';
 import Operator from './operator';
 
 export default class Filter implements QueryParam {
-  groupName: string = 'filter';
-  attribute: string;
-  operator: string;
-  value: string;
+  private groupName: string = 'filter';
+  private attribute: string;
+  private operator: string;
+  readonly value: string;
 
   constructor(attribute: string, operator: Operator, value: string) {
     this.attribute = attribute;
@@ -13,16 +13,13 @@ export default class Filter implements QueryParam {
     this.value = value;
   }
 
-  toString() : string {
-    const { groupName, attribute, operator, value } = this;
-    return `${groupName}[${attribute}][${operator}]=${value}`;
+  get field() : string {
+    const { groupName, attribute, operator} = this;
+    return `${groupName}[${attribute}][${operator}]`;
   }
 
-  toJson() : { field: string, value: string } {
-    const { groupName, attribute, operator, value } = this;
-    return {
-      field: `${groupName}[${attribute}][${operator}]`,
-      value,
-    }
+  toString() : string {
+    const { field, value } = this;
+    return `${field}=${value}`;
   }
 }

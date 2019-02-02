@@ -1,23 +1,23 @@
 import QueryParam from './queryParam';
 
 export default class Include implements QueryParam {
-  groupName: string = 'include';
-  attribute: string;
+  private groupName: string = 'include';
+  private attributes: Array<string>;
 
   constructor(...attributes: Array<string>) {
-    this.attribute = attributes.join(',');
+    this.attributes = attributes;
+  }
+
+  get field() : string {
+    return this.groupName;
+  }
+
+  get value() : string {
+    return this.attributes.join(',');
   }
 
   toString() : string {
-    const { groupName, attribute } = this;
-    return `${groupName}=${attribute}`;
-  }
-
-  toJson() : { field: string, value: string } {
-    const { groupName, attribute } = this;
-    return {
-      field: `${groupName}`,
-      value: attribute,
-    };
+    const { field, value } = this;
+    return `${field}=${value}`;
   }
 }

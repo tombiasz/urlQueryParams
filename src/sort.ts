@@ -1,25 +1,26 @@
 import QueryParam from './queryParam';
 
 export default class Sort implements QueryParam {
-  groupName: string = 'sort';
-  attribute: string;
-  direction: string;
+  private groupName: string = 'sort';
+  private attribute: string;
+  private direction: string;
 
   constructor(attribute: string, direction: string) {
     this.attribute = attribute;
     this.direction = direction;
   }
 
-  toString() : string {
-    const { groupName, attribute, direction } = this;
-    return `sort=${direction}${attribute}`;
+  get field() : string {
+    return this.groupName;
   }
 
-  toJson() : { field: string, value: string } {
-    const { groupName, attribute, direction } = this;
-    return {
-      field: groupName,
-      value: `${direction}${attribute}`,
-    };
+  get value() : string {
+    const { attribute, direction } = this;
+    return `${direction}${attribute}`;
+  }
+
+  toString() : string {
+    const { field, value } = this;
+    return `${field}=${value}`;
   }
 }

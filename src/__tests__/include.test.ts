@@ -18,23 +18,23 @@ describe('Include', () => {
     });
   });
 
-  describe('toJson()', () => {
-    test('should build proper query param for single attr', () => {
-      include = new Include(attr1);
-      const expected = {
-        field: `include`,
-        value: attr1,
-      };
-      expect(include.toJson()).toEqual(expected);
+  describe('field', () => {
+    test('should properly set field attribute', () => {
+    include = new Include(attr1);
+      expect(include.field).toBe('include');
+    });
+  });
+
+  describe('value', () => {
+    test('should properly set value attribute for single attr', () => {
+    include = new Include(attr1);
+      expect(include.value).toBe(attr1);
     });
 
-    test('should build proper query param for many attrs', () => {
+    test('should properly set value attribute for many attrs', () => {
       include = new Include(attr1, attr2);
-      const expected = {
-        field: `include`,
-        value: [attr1, attr2].join(','),
-      };
-      expect(include.toJson()).toEqual(expected);
+      const attr = [attr1, attr2].join(',');
+      expect(include.value).toBe(attr);
     });
   });
 });

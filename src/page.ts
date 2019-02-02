@@ -1,25 +1,22 @@
 import QueryParam from './queryParam';
 
 export default class Page implements QueryParam {
-  groupName: string = 'page';
-  attribute: string;
-  value: string;
+  private groupName: string = 'page';
+  private attribute: string;
+  readonly value: string;
 
   constructor(attribute: string, value: string) {
     this.attribute = attribute;
     this.value = value;
   }
 
-  toString() : string {
-    const { groupName, attribute, value } = this;
-    return `${groupName}[${attribute}]=${value}`;
+  get field() {
+    const { groupName, attribute } = this;
+    return `${groupName}[${attribute}]`;
   }
 
-  toJson() : { field: string, value: string } {
-    const { groupName, attribute, value } = this;
-    return {
-      field: `${groupName}[${attribute}]`,
-      value,
-    };
+  toString() : string {
+    const { field, value } = this;
+    return `${field}=${value}`;
   }
 }
