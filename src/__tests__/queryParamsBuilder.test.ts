@@ -18,14 +18,13 @@ class SampleParam implements QueryParam {
 
 describe('QueryParamsBuilder', () => {
   const Q = QueryParamsBuilder;
+  let q : QueryParamsBuilder;
+
+  beforeEach(() => {
+    q = new Q();
+  });
 
   describe('instance', () => {
-    let q : QueryParamsBuilder;
-
-    beforeEach(() => {
-      q = new Q();
-    });
-
     describe('add()', () => {
       test('should add param to list of params', () => {
         const param = new SampleParam('foo', 'bar');
@@ -67,4 +66,36 @@ describe('QueryParamsBuilder', () => {
       });
     });
   });
+
+  describe('example', () => {
+    test('should build proper string', () => {
+      const qs = q
+        .add(
+          Q.filter('type').notLike('fizz'),
+          Q.filter('amount').between('100', '50000')
+        )
+        .add(
+          Q.page().limit(20),
+          Q.page().offset(10),
+        )
+        .add(
+          Q.sort('created').desc(),
+        )
+        .add(
+          Q.include('category'),
+        )
+        .buildString();
+
+      const expected = [
+        '?filter[type][!like]=fizz',
+        '&filter[amount][between]=100,50000',
+        '&page[limit]=20',
+        '&page[offset]=10',
+        '&sort=-created',
+        '&include=category',
+      ].join('')
+
+      expect(qs).toBe(expected);
+    })
+  })
 });
